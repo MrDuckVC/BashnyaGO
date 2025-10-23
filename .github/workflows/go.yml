@@ -1,0 +1,42 @@
+name: Go CI
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+  pull_request:
+    branches:
+      - 'master'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # "Checkout": скачивает код в виртуальную машину
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # "Set up Go": устанавливает нужную версию Go
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.3'
+
+      # "Test": запускает тесты (если они есть)
+      - name: Test
+        run: go test -v ./...
+
+      # "Check Formatting": проверяет, что код отформатирован
+      - name: Check formatting (gofmt)
+        run: |
+          # gofmt -l . рекурсивно проверит все .go файлы с текущей директории
+          files=$(gofmt -l .)
+          if [ -n "$files" ]; then
+            echo "Go code is not formatted. Please run 'go fmt ./...'"
+            echo "Unformatted files:"
+            echo "$files"
+            exit 1
+          fi
+          echo "All Go files are formatted."
