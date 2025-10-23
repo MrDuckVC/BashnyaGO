@@ -31,8 +31,8 @@ jobs:
       # "Check Formatting": проверяет, что код отформатирован
       - name: Check formatting (gofmt)
         run: |
-          # gofmt -l ./... выведет список файлов, которые не отформатированы
-          files=$(gofmt -l ./...)
+          # gofmt -l . рекурсивно проверит все .go файлы с текущей директории
+          files=$(gofmt -l .)
           if [ -n "$files" ]; then
             echo "Go code is not formatted. Please run 'go fmt ./...'"
             echo "Unformatted files:"
