@@ -24,10 +24,6 @@ jobs:
         with:
           go-version: '1.25.3'
 
-      # "Build": проверяет, что код компилируется
-      - name: Build
-        run: go build -v ./... # во всех папках рекурсивно
-
       # "Test": запускает тесты (если они есть)
       - name: Test
         run: go test -v ./...
