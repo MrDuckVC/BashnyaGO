@@ -29,12 +29,14 @@ jobs:
         run: go test -v ./...
 
       # "Check Formatting": проверяет, что код отформатирован
-      - name: Check formatting (go fmt)
+      - name: Check formatting (gofmt)
         run: |
-          # go fmt -l . выведет список файлов, которые не отформатированы
-          files=$(go fmt -l ./...)
+          # gofmt -l ./... выведет список файлов, которые не отформатированы
+          files=$(gofmt -l ./...)
           if [ -n "$files" ]; then
             echo "Go code is not formatted. Please run 'go fmt ./...'"
+            echo "Unformatted files:"
             echo "$files"
             exit 1
           fi
+          echo "All Go files are formatted."
