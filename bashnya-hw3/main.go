@@ -30,4 +30,10 @@ func runStackDemo() {
 
 func main() {
 	runStackDemo()
+
+	fmt.Println()
+	fmt.Println("---------------------------------")
+	fmt.Println()
+
+	runDequeDemo()
 }
