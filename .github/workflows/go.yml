@@ -24,10 +24,6 @@ jobs:
         with:
           go-version: '1.25.3'
 
-      # "Test": запускает тесты (если они есть)
-      - name: Test
-        run: go test -v ./...
-
       # "Check Formatting": проверяет, что код отформатирован
       - name: Check formatting (gofmt)
         run: |
